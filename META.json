@@ -1,10 +1,10 @@
 {
-   "abstract" : "Main backend module",
+   "abstract" : "Main interface for accessing a RackTables database",
    "author" : [
       "Sebastien Aperghis-Tramoni <sebastien@aperghis.net>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "open_source"
    ],
@@ -13,21 +13,15 @@
       "version" : "2"
    },
    "name" : "RackMan",
-   "no_index" : {
-      "directory" : [
-         "t",
-         "inc"
-      ]
-   },
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "0"
+            "Test::More" : "0.45"
          }
       },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "0"
+            "Module::Build" : "0.40"
          }
       },
       "runtime" : {
@@ -59,12 +53,374 @@
             "Path::Class" : "0",
             "Socket" : "0",
             "Term::ANSIColor" : "0",
-            "Test::More" : "0.45",
             "YAML" : "0",
             "namespace::autoclean" : "0"
          }
       }
    },
+   "provides" : {
+      "RackMan" : {
+         "file" : "lib/RackMan.pm",
+         "version" : "1.15"
+      },
+      "RackMan::Config" : {
+         "file" : "lib/RackMan/Config.pm",
+         "version" : 0
+      },
+      "RackMan::Device" : {
+         "file" : "lib/RackMan/Device.pm",
+         "version" : 0
+      },
+      "RackMan::Device::PDU" : {
+         "file" : "lib/RackMan/Device/PDU.pm",
+         "version" : 0
+      },
+      "RackMan::Device::PDU::APC_RackPDU" : {
+         "file" : "lib/RackMan/Device/PDU/APC_RackPDU.pm",
+         "version" : 0
+      },
+      "RackMan::Device::Server" : {
+         "file" : "lib/RackMan/Device/Server.pm",
+         "version" : 0
+      },
+      "RackMan::Device::Server::HP_ProLiant" : {
+         "file" : "lib/RackMan/Device/Server/HP_ProLiant.pm",
+         "version" : 0
+      },
+      "RackMan::Device::Switch" : {
+         "file" : "lib/RackMan/Device/Switch.pm",
+         "version" : 0
+      },
+      "RackMan::Device::Switch::Cisco_Catalyst" : {
+         "file" : "lib/RackMan/Device/Switch/Cisco_Catalyst.pm",
+         "version" : 0
+      },
+      "RackMan::Device::VM" : {
+         "file" : "lib/RackMan/Device/VM.pm",
+         "version" : 0
+      },
+      "RackMan::File" : {
+         "file" : "lib/RackMan/File.pm",
+         "version" : 0
+      },
+      "RackMan::Format::Bacula" : {
+         "file" : "lib/RackMan/Format/Bacula.pm",
+         "version" : 0
+      },
+      "RackMan::Format::Cacti" : {
+         "file" : "lib/RackMan/Format/Cacti.pm",
+         "version" : 0
+      },
+      "RackMan::Format::DHCP" : {
+         "file" : "lib/RackMan/Format/DHCP.pm",
+         "version" : 0
+      },
+      "RackMan::Format::Generic" : {
+         "file" : "lib/RackMan/Format/Generic.pm",
+         "version" : 0
+      },
+      "RackMan::Format::Kickstart" : {
+         "file" : "lib/RackMan/Format/Kickstart.pm",
+         "version" : 0
+      },
+      "RackMan::Format::LDAP" : {
+         "file" : "lib/RackMan/Format/LDAP.pm",
+         "version" : 0
+      },
+      "RackMan::Format::Nagios" : {
+         "file" : "lib/RackMan/Format/Nagios.pm",
+         "version" : 0
+      },
+      "RackMan::Format::PXE" : {
+         "file" : "lib/RackMan/Format/PXE.pm",
+         "version" : 0
+      },
+      "RackMan::SCM" : {
+         "file" : "lib/RackMan/SCM.pm",
+         "version" : 0
+      },
+      "RackMan::Tasks" : {
+         "file" : "lib/RackMan/Tasks.pm",
+         "version" : 0
+      },
+      "RackMan::Template" : {
+         "file" : "lib/RackMan/Template.pm",
+         "version" : 0
+      },
+      "RackMan::Types" : {
+         "file" : "lib/RackMan/Types.pm",
+         "version" : 0
+      },
+      "RackMan::Utils" : {
+         "file" : "lib/RackMan/Utils.pm",
+         "version" : 0
+      },
+      "RackTables::Schema" : {
+         "file" : "lib/RackTables/Schema.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Atom" : {
+         "file" : "lib/RackTables/Schema/Result/Atom.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Attribute" : {
+         "file" : "lib/RackTables/Schema/Result/Attribute.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::AttributeMap" : {
+         "file" : "lib/RackTables/Schema/Result/AttributeMap.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::AttributeValue" : {
+         "file" : "lib/RackTables/Schema/Result/AttributeValue.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::CachedPAV" : {
+         "file" : "lib/RackTables/Schema/Result/CachedPAV.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::CachedPNV" : {
+         "file" : "lib/RackTables/Schema/Result/CachedPNV.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::CachedPVM" : {
+         "file" : "lib/RackTables/Schema/Result/CachedPVM.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::CactiGraph" : {
+         "file" : "lib/RackTables/Schema/Result/CactiGraph.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Chapter" : {
+         "file" : "lib/RackTables/Schema/Result/Chapter.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Config" : {
+         "file" : "lib/RackTables/Schema/Result/Config.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Dictionary" : {
+         "file" : "lib/RackTables/Schema/Result/Dictionary.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::EntityLink" : {
+         "file" : "lib/RackTables/Schema/Result/EntityLink.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::File" : {
+         "file" : "lib/RackTables/Schema/Result/File.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::FileLink" : {
+         "file" : "lib/RackTables/Schema/Result/FileLink.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4Address" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4Address.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4Allocation" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4Allocation.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4LB" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4LB.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4NAT" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4NAT.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4Network" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4Network.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4RS" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4RS.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4RSPool" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4RSPool.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv4VS" : {
+         "file" : "lib/RackTables/Schema/Result/IPv4VS.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv6Address" : {
+         "file" : "lib/RackTables/Schema/Result/IPv6Address.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv6Allocation" : {
+         "file" : "lib/RackTables/Schema/Result/IPv6Allocation.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::IPv6Network" : {
+         "file" : "lib/RackTables/Schema/Result/IPv6Network.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::LDAPCache" : {
+         "file" : "lib/RackTables/Schema/Result/LDAPCache.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Link" : {
+         "file" : "lib/RackTables/Schema/Result/Link.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Molecule" : {
+         "file" : "lib/RackTables/Schema/Result/Molecule.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::MountOperation" : {
+         "file" : "lib/RackTables/Schema/Result/MountOperation.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::ObjectLog" : {
+         "file" : "lib/RackTables/Schema/Result/ObjectLog.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::ObjectParentCompat" : {
+         "file" : "lib/RackTables/Schema/Result/ObjectParentCompat.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Port" : {
+         "file" : "lib/RackTables/Schema/Result/Port.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::PortAllowedVLAN" : {
+         "file" : "lib/RackTables/Schema/Result/PortAllowedVLAN.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::PortCompat" : {
+         "file" : "lib/RackTables/Schema/Result/PortCompat.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::PortInnerInterface" : {
+         "file" : "lib/RackTables/Schema/Result/PortInnerInterface.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::PortInterfaceCompat" : {
+         "file" : "lib/RackTables/Schema/Result/PortInterfaceCompat.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::PortNativeVLAN" : {
+         "file" : "lib/RackTables/Schema/Result/PortNativeVLAN.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::PortVLANMode" : {
+         "file" : "lib/RackTables/Schema/Result/PortVLANMode.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Rack" : {
+         "file" : "lib/RackTables/Schema/Result/Rack.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::RackHistory" : {
+         "file" : "lib/RackTables/Schema/Result/RackHistory.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::RackObject" : {
+         "file" : "lib/RackTables/Schema/Result/RackObject.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::RackObjectHistory" : {
+         "file" : "lib/RackTables/Schema/Result/RackObjectHistory.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::RackRow" : {
+         "file" : "lib/RackTables/Schema/Result/RackRow.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::RackSpace" : {
+         "file" : "lib/RackTables/Schema/Result/RackSpace.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::Script" : {
+         "file" : "lib/RackTables/Schema/Result/Script.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::ServiceStorage" : {
+         "file" : "lib/RackTables/Schema/Result/ServiceStorage.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::ServiceTree" : {
+         "file" : "lib/RackTables/Schema/Result/ServiceTree.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::TagStorage" : {
+         "file" : "lib/RackTables/Schema/Result/TagStorage.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::TagTree" : {
+         "file" : "lib/RackTables/Schema/Result/TagTree.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::UserAccount" : {
+         "file" : "lib/RackTables/Schema/Result/UserAccount.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::UserConfig" : {
+         "file" : "lib/RackTables/Schema/Result/UserConfig.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANDescription" : {
+         "file" : "lib/RackTables/Schema/Result/VLANDescription.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANDomain" : {
+         "file" : "lib/RackTables/Schema/Result/VLANDomain.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANIPv4" : {
+         "file" : "lib/RackTables/Schema/Result/VLANIPv4.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANIPv6" : {
+         "file" : "lib/RackTables/Schema/Result/VLANIPv6.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANSTRule" : {
+         "file" : "lib/RackTables/Schema/Result/VLANSTRule.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANSwitch" : {
+         "file" : "lib/RackTables/Schema/Result/VLANSwitch.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANSwitchTemplate" : {
+         "file" : "lib/RackTables/Schema/Result/VLANSwitchTemplate.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::VLANValidID" : {
+         "file" : "lib/RackTables/Schema/Result/VLANValidID.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::viewAssociatedPorts" : {
+         "file" : "lib/RackTables/Schema/Result/viewAssociatedPorts.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::viewIPv4AddressNetwork" : {
+         "file" : "lib/RackTables/Schema/Result/viewIPv4AddressNetwork.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::viewIPv4AddressRange" : {
+         "file" : "lib/RackTables/Schema/Result/viewIPv4AddressRange.pm",
+         "version" : 0
+      },
+      "RackTables::Schema::Result::viewRack" : {
+         "file" : "lib/RackTables/Schema/Result/viewRack.pm",
+         "version" : 0
+      },
+      "RackTables::Types" : {
+         "file" : "lib/RackTables/Types.pm",
+         "version" : 0
+      }
+   },
    "release_status" : "stable",
-   "version" : "1.14"
+   "resources" : {
+      "license" : [
+         "http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt"
+      ]
+   },
+   "version" : "1.15"
 }

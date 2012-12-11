@@ -119,5 +119,5 @@ t/99-distchk.t
 t/files/rack.conf
 tools/make_doc
 tools/schema
-META.yml                                 Module YAML meta-data (added by MakeMaker)
-META.json                                Module JSON meta-data (added by MakeMaker)
+META.yml
+META.json
