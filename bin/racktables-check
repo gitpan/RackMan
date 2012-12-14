@@ -10,11 +10,12 @@ use List::MoreUtils qw< uniq >;
 use RackMan;
 use RackMan::Config;
 use RackMan::Tasks;
+use RackMan::Utils;
 use Socket;
 
 
 $::PROGRAM = "RackTables consistency check";
-$::VERSION = "1.01";
+$::VERSION = "1.02";
 $::COMMAND = basename($0);
 
 
@@ -148,14 +149,8 @@ sub process {
 
             # compile the regexp to detect errors early
             if ($enforce{operator} eq OP_REGEXP) {
-                $enforce{operand} =~ s:^/::;
-                $enforce{operand} =~ s:/(\w+)?$::;
-                my $flags = defined $1 ? "(?:$1)" : "";
-                $enforce{operand} = eval { qr/$flags$enforce{operand}/ }
-                    or do {
-                        (my $err = $@) =~ s/ at .* line \d+\.//;
-                        RackMan->error("invalid regexp: $err");
-                    };
+                ($enforce{operand}, my $err) = parse_regexp($enforce{operand});
+                RackMan->error("invalid regexp: $err") if $err;
             }
 
             # verify that the check function is actually known
@@ -202,13 +197,16 @@ sub process {
         = $rackman->config->val(CONFIG_SECTION, "enforce_interface_match");
 
     # fetch the list of devices
-    my @devices
-        = RackMan::Tasks->task_list({ rackman => $rackman, type => "all" });
+    my @devices = @args
+        ? map +{ name => $_ }, @args
+        : RackMan::Tasks->task_list({ rackman => $rackman, type => "all" });
 
     DEVICE:
     for my $device (@devices) {
         next if $device->{name} eq "(null)";
-        my $rackdev = $rackman->device_by_id($device->{id});
+        my $rackdev = exists $device->{id}
+            ? $rackman->device_by_id($device->{id})
+            : $rackman->device_by_name($device->{name});
         my $type = $rackdev->object_type;
         my @problems;
 
@@ -294,7 +292,7 @@ sub process {
         if ($enforce_interface_match) {
             my %port = map { $_->{name} => $_ } @{ $rackdev->ports };
 
-            for my $interface (@{$rackdev->ipv4addrs}, @{$rackdev->ipv6addrs}) {
+            for my $interface ($rackdev->physical_interfaces) {
                 my $name = $interface->{iface};
 
                 push @problems,
@@ -370,7 +368,7 @@ sub property_value {
             return $rackdev->$propname->{addr}
         }
         elsif ($propname eq PROP_INTERFACES) {
-            return map $_->{iface}, $rackdev->regular_ipv4addrs
+            return map $_->{iface}, $rackdev->physical_interfaces
         }
         elsif ($propname eq PROP_IPV4ADDRS) {
             return map $_->{addr}, $rackdev->$propname
@@ -477,6 +475,11 @@ Print the manual page of the program, then exit.
 Print the program name and version, then exit.
 
 =back
+
+=head2 Arguments
+
+The rest of the argument, if any, are used as device names to perform the
+checks upon. If none is given, process all known devices (minus the filter).
 
 
 =head1 DESCRIPTION

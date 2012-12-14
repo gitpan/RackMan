@@ -16,7 +16,7 @@ name: RackMan
 provides:
   RackMan:
     file: lib/RackMan.pm
-    version: 1.16
+    version: 1.17
   RackMan::Config:
     file: lib/RackMan/Config.pm
     version: 0
@@ -313,4 +313,4 @@ requires:
   namespace::autoclean: 0
 resources:
   license: http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt
-version: 1.16
+version: 1.17
