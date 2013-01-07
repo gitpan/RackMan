@@ -16,7 +16,7 @@ name: RackMan
 provides:
   RackMan:
     file: lib/RackMan.pm
-    version: 1.17
+    version: 1.18
   RackMan::Config:
     file: lib/RackMan/Config.pm
     version: 0
@@ -298,6 +298,7 @@ requires:
   HTML::Template::Filter::TT2: 0.03
   IPC::Run: 0
   JSON: 0
+  JSON::XS: 0
   List::MoreUtils: 0
   Moose: 1.00
   MooseX::NonMoose: 0
@@ -310,7 +311,8 @@ requires:
   Socket: 0
   Term::ANSIColor: 0
   YAML: 0
+  YAML::XS: 0
   namespace::autoclean: 0
 resources:
   license: http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt
-version: 1.17
+version: 1.18
